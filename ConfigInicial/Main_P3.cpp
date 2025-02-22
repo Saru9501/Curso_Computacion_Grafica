@@ -1,6 +1,9 @@
-////lIGA DE GITHUB
-// 
-//CODIGO_FUENTE
+/*Autor: Lopez Hernandez Yesenia Sarahi
+* Num. Cuenta: 317248683
+* Practica 3: Proyecciones y transformaciones basicas
+* Objetivo: Realizar unos cubos dependiendo de las letras de tu nombre, rotarlos y mostrar los diferentes colores de las caras
+* Fecha: 23 de Febrero de 2025
+*/
 
 #include<iostream>
 
@@ -269,7 +272,7 @@ int main() {
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(-3.5f, -4.5f, 0.0f));
 		model = glm::rotate(model, 0.2f, glm::vec3(0.0f,-0.1f, 0.0f));
-		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
+		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		glDrawArrays(GL_TRIANGLES, 0, 36); //
@@ -285,7 +288,7 @@ int main() {
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(5.5f, -4.5f, 0.0f));
 		model = glm::rotate(model, -1.5f, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
+		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		glDrawArrays(GL_TRIANGLES, 0, 36); //
