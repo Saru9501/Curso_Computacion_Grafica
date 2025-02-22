@@ -225,7 +225,7 @@ int main() {
 	    view = glm::translate(view, glm::vec3(-0.5f,0.0f,-14.0f));
 		model = glm::translate(model, glm::vec3(1.0f, 4.5f, 0.0f));
 		model = glm::rotate(model, -1.57f, glm::vec3(-0.8f, 0.0f, 0.0f)); // use to compare orthographic and perspective projection
-		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
+		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		//view = glm::translate( view, glm::vec3( screenWidth / 2, screenHeight / 2,-700.0f ) ); // use with orthographic projection
 		
 		GLint modelLoc = glGetUniformLocation(ourShader.Program, "model");
