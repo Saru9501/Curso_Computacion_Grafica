@@ -36,7 +36,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Proyecciones y transformaciones basicas", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Practica3: Proyecciones y transformaciones basicas", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -225,9 +225,12 @@ int main() {
 		glm::mat4 model=glm::mat4(1); //dibujar
 		glm::mat4 view=glm::mat4(1); //visualizar
 	
-	    view = glm::translate(view, glm::vec3(-0.5f,0.0f,-14.0f));
-		model = glm::translate(model, glm::vec3(1.0f, 4.5f, 0.0f));
-		model = glm::rotate(model, -1.57f, glm::vec3(-0.8f, 0.0f, 0.0f)); // use to compare orthographic and perspective projection
+	    view = glm::translate(view, glm::vec3(-0.5f,0.0f,-14.5f)); //Vista de la cámara
+
+		// Primer cubo Y
+		model = glm::translate(model, glm::vec3(1.0f, 4.5f, 0.0f)); //Ubicado parte superior
+		model = glm::rotate(model, -1.57f, glm::vec3(-0.8f, 0.0f, 0.0f)); // 
+		model = glm::rotate(model, 0.5f, glm::vec3(0.0f, 0.0f, 0.2f)); 
 		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		//view = glm::translate( view, glm::vec3( screenWidth / 2, screenHeight / 2,-700.0f ) ); // use with orthographic projection
 		
@@ -243,63 +246,65 @@ int main() {
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36); //Y
 
+		//Segundo cubo
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(-3.5f, 0.0f, 0.0f));
 		model = glm::rotate(model, -1.5f, glm::vec3(0.0f, -0.8f, 0.0f));
 		model = glm::rotate(model, 3.14f, glm::vec3(0.8f, 0.0f, 0.0f));
+		model = glm::rotate(model, -0.5f, glm::vec3(0.0f, 0.0f, 0.2f));
 		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
 		glDrawArrays(GL_TRIANGLES, 0, 36); //E
 
+		//Tercer cubo
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 0.8f, 0.0f));
-		//model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
-		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
+		model = glm::rotate(model, -1.0f, glm::vec3(0.2f, 0.0f, 0.5f));
+		model = glm::scale(model, glm::vec3(2.5f, 2.5f, 2.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		glDrawArrays(GL_TRIANGLES, 0, 36); //S
 
+		//Cuarto cubo
 		model = glm::mat4(1); //dibujar
-		model = glm::translate(model, glm::vec3(5.5f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(5.7f, 0.0f, 0.0f));
 		model = glm::rotate(model, 1.57f, glm::vec3(-0.8f, 0.0f, 0.0f));
+		model = glm::rotate(model, 0.5f, glm::vec3(0.0f, 0.0f, 0.2f));
 		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		glDrawArrays(GL_TRIANGLES, 0, 36); //
+		glDrawArrays(GL_TRIANGLES, 0, 36); //E
 
+		//Quinto cubo
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(-3.5f, -4.5f, 0.0f));
 		model = glm::rotate(model, 0.2f, glm::vec3(0.0f,-0.1f, 0.0f));
 		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		glDrawArrays(GL_TRIANGLES, 0, 36); //
+		glDrawArrays(GL_TRIANGLES, 0, 36); //N
 
+		//Sexto cubo
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(1.0f, -4.5f, 0.0f));
 		model = glm::rotate(model, 1.57f, glm::vec3(0.0f, 1.f, 0.0f));
 		model = glm::scale(model, glm::vec3(3.5f, 3.5f, 3.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		glDrawArrays(GL_TRIANGLES, 0, 36); //
+		glDrawArrays(GL_TRIANGLES, 0, 36); //I
 
+		//Septimo cubo
 		model = glm::mat4(1); //dibujar
 		model = glm::translate(model, glm::vec3(5.5f, -4.5f, 0.0f));
 		model = glm::rotate(model, -1.5f, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		glDrawArrays(GL_TRIANGLES, 0, 36); //
+		glDrawArrays(GL_TRIANGLES, 0, 36); //A
 
 		glBindVertexArray(0);
-
-
-
-		
-		
-		
 
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
@@ -311,9 +316,4 @@ int main() {
 
 	glfwTerminate();
 	return EXIT_SUCCESS;
-
-  
-
 }
-
-
