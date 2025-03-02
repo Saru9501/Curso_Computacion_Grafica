@@ -1,3 +1,9 @@
+/*Autor: Lopez Hernandez Yesenia Sarahi
+* Num. Cuenta: 317248683
+* Practica 4: Modelado Geometrico
+* Objetivo: Realizar el modelado 3D con cubos en forma de un leon
+* Fecha: 02 de Marzo de 2025
+*/
 #include<iostream>
 
 //#define GLEW_STATIC
@@ -21,7 +27,7 @@ void Inputs(GLFWwindow *window);
 const GLint WIDTH = 800, HEIGHT = 600;
 float movX=0.0f;
 float movY=0.0f;
-float movZ=-5.0f;
+float movZ=-10.0f;
 float rot = 0.0f;
 int main() {
 	glfwInit();
@@ -34,7 +40,7 @@ int main() {
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Modelado geometrico", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Practica 4: Modelado geometrico", nullptr, nullptr);
 
 	int screenWidth, screenHeight;
 
@@ -82,51 +88,222 @@ int main() {
 
 	// use with Perspective Projection
 	float vertices[] = {
-		-0.5f, -0.5f, 0.5f, 1.0f, 0.0f,0.0f,//Front
-		0.5f, -0.5f, 0.5f,  1.0f, 0.0f,0.0f,
-		0.5f,  0.5f, 0.5f,  1.0f, 0.0f,0.0f,
-		0.5f,  0.5f, 0.5f,  1.0f, 0.0f,0.0f,
-		-0.5f,  0.5f, 0.5f, 1.0f, 0.0f,0.0f,
-		-0.5f, -0.5f, 0.5f, 1.0f, 0.0f,0.0f,
+		//Cubo amarillo
+		-0.5f, -0.5f, 0.5f, 1.0f, 1.0f,0.0f,//Front
+		0.5f, -0.5f, 0.5f,  1.0f, 1.0f,0.0f,
+		0.5f,  0.5f, 0.5f,  1.0f, 1.0f,0.0f,
+		0.5f,  0.5f, 0.5f,  1.0f, 1.0f,0.0f,
+		-0.5f,  0.5f, 0.5f, 1.0f, 1.0f,0.0f,
+		-0.5f, -0.5f, 0.5f, 1.0f, 1.0f,0.0f,
 		
-	    -0.5f, -0.5f,-0.5f, 0.0f, 1.0f,0.0f,//Back
-		 0.5f, -0.5f,-0.5f, 0.0f, 1.0f,0.0f,
-		 0.5f,  0.5f,-0.5f, 0.0f, 1.0f,0.0f,
-		 0.5f,  0.5f,-0.5f, 0.0f, 1.0f,0.0f,
-	    -0.5f,  0.5f,-0.5f, 0.0f, 1.0f,0.0f,
-	    -0.5f, -0.5f,-0.5f, 0.0f, 1.0f,0.0f,
+	    -0.5f, -0.5f,-0.5f, 1.0f, 0.906f,0.0f,//Back
+		 0.5f, -0.5f,-0.5f, 1.0f, 0.906f,0.0f,
+		 0.5f,  0.5f,-0.5f, 1.0f, 0.906f,0.0f,
+		 0.5f,  0.5f,-0.5f, 1.0f, 0.906f,0.0f,
+	    -0.5f,  0.5f,-0.5f, 1.0f, 0.906f,0.0f,
+	    -0.5f, -0.5f,-0.5f, 1.0f, 0.906f,0.0f,
 		
-		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 0.0f,1.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f, 0.0f,1.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f, 0.0f,1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f, 0.0f,1.0f,
-		 0.5f,  -0.5f, 0.5f, 0.0f, 0.0f,1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.8f,0.0f, //Izquierda
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.8f,0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 0.8f,0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 0.8f,0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.8f,0.0f,
+		 0.5f,  -0.5f, 0.5f,  1.0f, 0.8f,0.0f,
       
-		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f,0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,0.0f,
-		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f,0.0f,
-		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f,0.0f,
-		-0.5f, -0.5f,  0.5f,  1.0f, 1.0f,0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f,0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.8f,0.0f, //Derecha
+		-0.5f,  0.5f, -0.5f,  1.0f, 0.8f,0.0f,
+		-0.5f, -0.5f, -0.5f,  1.0f, 0.8f,0.0f,
+		-0.5f, -0.5f, -0.5f,  1.0f, 0.8f,0.0f,
+		-0.5f, -0.5f,  0.5f,  1.0f, 0.8f,0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.8f,0.0f,
 		
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,1.0f,
-		0.5f, -0.5f, -0.5f,  0.0f, 1.0f,1.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, 1.0f,1.0f,
-		0.5f, -0.5f,  0.5f,  0.0f, 1.0f,1.0f,
-		-0.5f, -0.5f,  0.5f, 0.0f, 1.0f,1.0f,
-		-0.5f, -0.5f, -0.5f, 0.0f, 1.0f,1.0f,
+		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f,0.0f,
+		0.5f, -0.5f, -0.5f,  1.0f, 1.0f,0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 1.0f,0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 1.0f,0.0f,
+		-0.5f, -0.5f,  0.5f, 1.0f, 1.0f,0.0f,
+		-0.5f, -0.5f, -0.5f, 1.0f, 1.0f,0.0f,
 		
-		-0.5f,  0.5f, -0.5f, 1.0f, 0.2f,0.5f,
-		0.5f,  0.5f, -0.5f,  1.0f, 0.2f,0.5f,
-		0.5f,  0.5f,  0.5f,  1.0f, 0.2f,0.5f,
-		0.5f,  0.5f,  0.5f,  1.0f, 0.2f,0.5f,
-		-0.5f,  0.5f,  0.5f, 1.0f, 0.2f,0.5f,
-		-0.5f,  0.5f, -0.5f, 1.0f, 0.2f,0.5f,
+		-0.5f,  0.5f, -0.5f, 1.0f, 0.65f,0.0f,
+		0.5f,  0.5f, -0.5f,  1.0f, 0.65f,0.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 0.65f,0.0f,
+		0.5f,  0.5f,  0.5f, 1.0f, 0.65f,0.0f,
+		-0.5f,  0.5f,  0.5f, 1.0f, 0.65f,0.0f,
+		-0.5f,  0.5f, -0.5f, 1.0f, 0.65f,0.0f,
+
+		//Cubo naranja
+		-0.5f, -0.5f, 0.5f, 1.0f, 0.6f,0.0f,//Front
+		0.5f, -0.5f, 0.5f,  1.0f, 0.6f,0.0f,
+		0.5f,  0.5f, 0.5f,  1.0f, 0.6f,0.0f,
+		0.5f,  0.5f, 0.5f,  1.0f, 0.6f,0.0f,
+		-0.5f,  0.5f, 0.5f, 1.0f, 0.6f,0.0f,
+		-0.5f, -0.5f, 0.5f, 1.0f, 0.6f,0.0f,
+
+		-0.5f, -0.5f,-0.5f, 1.0f, 0.6f,0.0f,//Back
+		 0.5f, -0.5f,-0.5f, 1.0f, 0.6f,0.0f,
+		 0.5f,  0.5f,-0.5f, 1.0f, 0.6f,0.0f,
+		 0.5f,  0.5f,-0.5f, 1.0f, 0.6f,0.0f,
+		-0.5f,  0.5f,-0.5f, 1.0f, 0.6f,0.0f,
+		-0.5f, -0.5f,-0.5f, 1.0f, 0.6f,0.0f,
+
+		 0.5f, -0.5f,  0.5f,  0.75f, 0.4f,0.0f,
+		 0.5f, -0.5f, -0.5f,  0.75f, 0.4f,0.0f,
+		 0.5f,  0.5f, -0.5f,  0.75f, 0.4f,0.0f,
+		 0.5f,  0.5f, -0.5f,  0.75f, 0.4f,0.0f,
+		 0.5f,  0.5f,  0.5f,  0.75f, 0.4f,0.0f,
+		 0.5f,  -0.5f, 0.5f, 0.75f, 0.4f,0.0f,
+
+		-0.5f,  0.5f,  0.5f,  0.75f, 0.4f,0.0f,
+		-0.5f,  0.5f, -0.5f,  0.75f, 0.4f,0.0f,
+		-0.5f, -0.5f, -0.5f,  0.75f, 0.4f,0.0f,
+		-0.5f, -0.5f, -0.5f,  0.75f, 0.4f,0.0f,
+		-0.5f, -0.5f,  0.5f,  0.75f, 0.4f,0.0f,
+		-0.5f,  0.5f,  0.5f,  0.75f, 0.4f,0.0f,
+
+		-0.5f, -0.5f, -0.5f, 1.0f, 0.6f,0.0f,
+		0.5f, -0.5f, -0.5f,  1.0f, 0.6f,0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 0.6f,0.0f,
+		0.5f, -0.5f,  0.5f,  1.0f, 0.6f,0.0f,
+		-0.5f, -0.5f,  0.5f, 1.0f, 0.6f,0.0f,
+		-0.5f, -0.5f, -0.5f, 1.0f, 0.6f,0.0f,
+
+		-0.5f,  0.5f, -0.5f, 1.0f, 0.6f,0.0f,
+		0.5f,  0.5f, -0.5f,  1.0f, 0.6f,0.0f,
+		0.5f,  0.5f,  0.5f,  1.0f, 0.6f,0.0f,
+		0.5f,  0.5f,  0.5f, 1.0f, 0.6f,0.0f,
+		-0.5f,  0.5f,  0.5f, 1.0f, 0.6f,0.0f,
+		-0.5f,  0.5f, -0.5f, 1.0f, 0.6f,0.0f,
+
+		//Negro
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,0.0f,//Front
+		0.5f, -0.5f, 0.5f,  0.0f, 0.0f,0.0f,
+		0.5f,  0.5f, 0.5f,  0.0f, 0.0f,0.0f,
+		0.5f,  0.5f, 0.5f,  0.0f, 0.0f,0.0f,
+		-0.5f,  0.5f, 0.5f, 0.0f, 0.0f,0.0f,
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,0.0f,
+
+		-0.5f, -0.5f,-0.5f, 0.0f, 0.0f,0.0f,//Back
+		 0.5f, -0.5f,-0.5f, 0.0f, 0.0f,0.0f,
+		 0.5f,  0.5f,-0.5f, 0.0f, 0.0f,0.0f,
+		 0.5f,  0.5f,-0.5f, 0.0f, 0.0f,0.0f,
+		-0.5f,  0.5f,-0.5f, 0.0f, 0.0f,0.0f,
+		-0.5f, -0.5f,-0.5f, 0.0f, 0.0f,0.0f,
+
+		 0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		 0.5f,  -0.5f, 0.5f, 0.0f, 0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f, 0.0f, 0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+
+		//Cubo Mostaza
+		   -0.5f, -0.5f, 0.5f, 1.0f, 1.0f,0.5f,//Front
+			0.5f, -0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, 0.5f, 0.5f, 1.0f, 1, 0.5f,
+			0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, -0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+
+			-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,//Back
+			0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+
+			0.5f, -0.5f, 0.5f, 1.0f, 0.9f, 0.5f,
+			0.5f, -0.5f, -0.5f, 1.0f, 0.9f, 0.5f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.9f, 0.5f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.9f, 0.5f,
+			0.5f, 0.5f, 0.5f, 1.0f, 0.9f, 0.5f,
+			0.5f, -0.5f, 0.5f, 1.0f, 0.9f, 0.5f,
+
+			-0.5f, 0.5f, 0.5f, 1.0f, 0.9f, 0.5f,
+			-0.5f, 0.5f, -0.5f, 1.0f, 0.9f, 0.5f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.9f, 0.5f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.9f, 0.5f,
+			-0.5f, -0.5f, 0.5f, 1.0f, 0.9f, 0.5f,
+			-0.5f, 0.5f, 0.5f, 1.0f, 0.9f, 0.5f,
+
+			-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, -0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, -0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, -0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+
+			-0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.5f,
+			-0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.5f,
+
+			//Cubo Rosa
+			-0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,//Front
+			0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,//Back
+			0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+
+			0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+
+			-0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, -0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+
+			-0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, 0.5f, 0.5f, 1.0f, 0.5f, 0.7f,
+			-0.5f, 0.5f, -0.5f, 1.0f, 0.5f, 0.7f,
+
 	};
-
-
-
 
 	GLuint VBO, VAO;
 	glGenVertexArrays(1, &VAO);
@@ -172,7 +349,7 @@ int main() {
 
 		// Render
 		// Clear the colorbuffer
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClearColor(0.5f, 0.78f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
 
@@ -196,51 +373,201 @@ int main() {
 	
 
 		glBindVertexArray(VAO);
+
+		//Cuerpo del leon 
 	    model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(1.0f, 0.1f, 1.0f)); //Ancho, grosor, profundidad
-		model = glm::translate(model, glm::vec3(0.0f, 0.6f, 0.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 2.0f, 2.0f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		//Respaldo
+		//Pierna 1
 		model = glm::mat4(1.0f); 
-		model = glm::scale(model, glm::vec3(0.1f, 1.0f, 1.0f)); //Ancho, grosor, profundidad
-		model = glm::translate(model, glm::vec3(-4.5f, 0.55f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 1.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-1.8f, -0.9f, -0.9f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		//Pata 1 
+		//Pata 1
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.05f)); //Tamaño de la pata
-		model = glm::translate(model, glm::vec3(2.9f, -0.45f, 8.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-1.8f, -4.0f, -0.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		//Pierna 2
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.7f, 1.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-1.8f, -0.9f, 0.9f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		
+
 		//Pata 2
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.05f)); //Tamaño de la pata
-		model = glm::translate(model, glm::vec3(-2.9f, -0.45f, 8.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-1.8f, -4.0f, 0.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+		
+		//Pierna 3
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.7f, 1.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(1.8f, -0.9f, -0.9f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//Pata 3
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.05f)); //Tamaño de la pata
-		model = glm::translate(model, glm::vec3(-2.9f, -0.45f, -8.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(1.8f, -4.0f, -0.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		//Pierna 4
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.7f, 1.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(1.8f, -0.9f, 0.9f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//Pata 4
 		model = glm::mat4(1.0f);
-		model = glm::scale(model, glm::vec3(0.1f, 0.6f, 0.05f)); //Tamaño de la pata
-		model = glm::translate(model, glm::vec3(2.9f, -0.45f, -8.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.5f, 0.7f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(1.8f, -4.0f, 0.9f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		//Melena  
+		//Primera parte 
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.5f, 2.1f, 2.9f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.5f, 2.5f, 2.5f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+		
+		//Parte de enmedio
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.5f, 3.0f, 2.6f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-4.7f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.5f, 2.6f, 3.4f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-4.7f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		//Parte de enfrente
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.5f, 2.5f, 2.4f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-5.4f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+		
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.5f, 2.1f, 2.8f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-5.4f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
+		//Cabeza
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.8f, 1.5f, 1.9f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-4.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		
+		//Orejas
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.5f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-10.3f, 2.0f, 1.2f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.5f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-10.3f, 2.0f, -1.2f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//Oreja de adentro derecha
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.5f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-10.8f, 2.0f, -1.2f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.7f, 0.7f)); //Ancho, grosor, profundidad
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 144, 180);
+
+		//Oreja de adentro izquierda
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.3f, 0.5f, 0.5f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-10.8f, 2.0f, 1.2f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.7f, 0.7f)); //Ancho, grosor, profundidad
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 144,180);
+		
+		//Hocico
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 1.0f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-4.6f, -0.45f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 108, 144);
+
+		//Ojos
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.20f, 0.25f, 0.25f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-18.0f, 1.5f, 1.6f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 72, 108);
+
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.20f, 0.25f, 0.25f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-18.0f, 1.5f, -1.6f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 72, 108);
+
+		//Boca
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.20f, 0.25f, 0.32f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-20.2f, -0.4f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 72, 108);
+
+
+		model = glm::mat4(1.0f);
+		model = glm::scale(model, glm::vec3(0.20f, 0.3f, 0.16f)); //Ancho, grosor, profundidad
+		model = glm::translate(model, glm::vec3(-20.2f, -1.0f, 0.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 72, 108);
+
+		//Cola
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(2.5f, 0.4f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 0.40f, 0.50f)); //Ancho, grosor, profundidad
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(3.1f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 0.40f, 0.50f)); //Ancho, grosor, profundidad
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//Pelito de la cola
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(3.85f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.50f, 0.40f, 0.50f)); //Ancho, grosor, profundidad
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 36, 72);
+
 		glBindVertexArray(0);
-
-				
-
 		// Swap the screen buffers
 		glfwSwapBuffers(window);
 	
@@ -257,21 +584,21 @@ int main() {
 	 if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)  //GLFW_RELEASE
 		 glfwSetWindowShouldClose(window, true);
 	 if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		 movX += 0.03f;
+		 movX += 0.02f;
 	 if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		 movX -= 0.03f;
+		 movX -= 0.02f;
 	 if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-		 movY += 0.03f;
+		 movY += 0.02f;
 	 if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		 movY -= 0.03f;
+		 movY -= 0.02f;
 	 if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		 movZ -= 0.08f;
+		 movZ -= 0.02f;
 	 if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		 movZ += 0.08f;
+		 movZ += 0.02f;
 	 if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-		 rot += 0.4f;
+		 rot += 0.2f;
 	 if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		 rot -= 0.4f;
+		 rot -= 0.2f;
  }
 
 
