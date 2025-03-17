@@ -1,8 +1,8 @@
 /*Autor: Lopez Hernandez Yesenia Sarahi
 * Num. Cuenta: 317248683
-* Previo 6: Carga de modelos
-* Objetivo: Realizar la carga de un perro en 3D
-* Fecha: 11 de Marzo de 2025
+* Practica 6: Carga de modelos
+* Objetivo: Realizar la carga creacion de un escenario donde situemos al perro rojo en 3D
+* Fecha: 16 de Marzo de 2025
 */
 
 // Std. Includes
@@ -61,7 +61,7 @@ int main()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Yesenia Lopez: Previo 6: Carga de modelos y camara sintetica", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Yesenia Lopez: Practica 6: Carga de modelos y camara sintetica", nullptr, nullptr);
 
     if (nullptr == window)
     {
@@ -102,6 +102,18 @@ int main()
 
     // Load models
     Model dog((char*)"Models/RedDog.obj");
+    Model arbol((char*)"Modelos/Arbol.obj");
+    Model pino((char*)"Modelos/pino.obj");
+    Model pino2((char*)"Modelos/pino2.obj");
+    Model pino3((char*)"Modelos/pino3.obj");
+    Model suelo((char*)"Modelos/Suelo.obj");
+    Model roca((char*)"Modelos/roca.obj");
+    Model roca2((char*)"Modelos/Roca2.obj");
+    Model tronco((char*)"Modelos/Tronco.obj");
+    Model planta((char*)"Modelos/Planta.obj");
+    Model planta2((char*)"Modelos/Suegra.obj");
+    Model arbusto((char*)"Modelos/Arbusto.obj");
+
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     // Game loop
@@ -117,7 +129,7 @@ int main()
         DoMovement();
 
         // Clear the colorbuffer
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClearColor(0.35f, 0.55f, 0.7f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shader.Use();
@@ -128,14 +140,121 @@ int main()
 
         // Draw the loaded model
         glm::mat4 model(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.1f, 0.0f)); // Posición del perro
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         dog.Draw(shader);
 
-        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-        model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.5f, -0.15f, 1.2f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f)); // Escala del árbol
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        dog.Draw(shader);
+        arbol.Draw(shader);
 
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.0f, -0.1f, -0.2f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.95f, 0.95f, 0.95f)); // Escala del árbol
+        model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 1.0f, 0.0f)); //Rotacion del árbol
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(shader);
+
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.1f, -0.1f, 0.7f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.83f, 0.83f, 0.83f)); // Escala del árbol
+        model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 0.2f, 0.0f)); //Rotacion del árbol
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(shader);
+
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.3f, -1.0f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f)); // Escala del árbol
+        model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 0.8f, 0.0f)); //Rotacion del árbol
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(shader);
+
+        // Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.4f, -0.3f, -0.8f)); 
+        model = glm::scale(model, glm::vec3(0.85f, 0.85f, 0.85f)); 
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino2.Draw(shader);
+        
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-2.2f, -0.3f, -1.4f)); 
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino.Draw(shader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.4f, -0.3f, 1.8f)); 
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino2.Draw(shader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.4f, -0.3f, 0.8f)); 
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino3.Draw(shader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(2.4f, -0.3f, 0.6f)); 
+        model = glm::scale(model, glm::vec3(0.85f, 0.85f, 0.85f)); 
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino.Draw(shader);
+
+        // Draw the suelo model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f)); 
+        model = glm::scale(model, glm::vec3(2.0f, 1.0f, 2.0f)); 
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        suelo.Draw(shader);
+
+        // Draw the roca model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.1f, -0.4f, 0.2f));
+        model = glm::scale(model, glm::vec3(1.2f, 1.2f, 1.2f)); // Escala de la roca
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        roca.Draw(shader);
+
+        // Draw the roca2 model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.2f));
+        model = glm::scale(model, glm::vec3(0.65f, 0.65f, 0.65f)); // Escala de la segunda roca
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        roca2.Draw(shader);
+
+        // Draw the planta model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.0f, -0.3f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.95f, 1.2f, 0.95f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        planta.Draw(shader);
+
+        // Draw the planta model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 3.0f));
+        model = glm::scale(model, glm::vec3(0.95f, 0.95f, 0.95f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        planta2.Draw(shader);
+
+        // Draw the tronco model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.2f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.90f, 0.90f, 0.90f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        tronco.Draw(shader);
+
+        // Draw the arbusto model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.15f, -2.5f));
+        model = glm::scale(model, glm::vec3(2.5f, 2.5f, 2.5f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbusto.Draw(shader);
 
         // Swap the buffers
         glfwSwapBuffers(window);
