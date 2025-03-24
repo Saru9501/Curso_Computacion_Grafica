@@ -1,8 +1,8 @@
 /*Autor: Lopez Hernandez Yesenia Sarahi
 * Num. Cuenta: 317248683
-* Previo 7: Texturizado
-* Objetivo: Realizar las actividades vistas en el video
-* Fecha: 18 de Marzo de 2025
+* Practica 7: Texturizado
+* Objetivo: Realizar la texturizacion de un cubo
+* Fecha: 23 de Marzo de 2025
 */
 
 #include <iostream>
@@ -63,7 +63,7 @@ int main()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	// Create a GLFWwindow object that we can use for GLFW's functions
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Yesenia Lopez, Previo 7: Texturizado", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Yesenia Lopez, Practica 7: Texturizado", nullptr, nullptr);
 
 	if (nullptr == window)
 	{
@@ -107,18 +107,61 @@ int main()
 	GLfloat vertices[] =
 	{
 		// Positions            // Colors              // Texture Coords
-		-0.5f, -0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,0.0f,
-		0.5f, -0.5f, 0.0f,	   1.0f, 1.0f,1.0f,		1.0f,0.0f,
-		0.5f,  0.5f, 0.0f,     1.0f, 1.0f,1.0f,	    1.0f,1.0f,
-		-0.5f,  0.5f, 0.0f,    1.0f, 1.0f,1.0f,		0.0f,1.0f,
+		//Frontal
+		-0.5f, -0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.0f,0.33f,  //Esquina inferior izquierda
+		 0.5f, -0.5f, 0.5f,	   1.0f, 1.0f,1.0f,		0.25f,0.33f,  //Esquina inferior derecha
+		 0.5f,  0.5f, 0.5f,    1.0f, 1.0f,1.0f,	    0.25f,0.64f,  //Esquina superior derecha
+		-0.5f,  0.5f, 0.5f,    1.0f, 1.0f,1.0f,		0.0f,0.64f,  //Esquina superior izquierda
 
+		//Detras
+		-0.5f, -0.5f,-0.5f,    1.0f, 1.0f,1.0f,		0.5f,0.33f,  //Esquina inferior izquierda
+		 0.5f, -0.5f,-0.5f,    1.0f, 1.0f,1.0f,		0.75f,0.33f,  //Esquina inferior derecha
+		 0.5f,  0.5f,-0.5f,    1.0f, 1.0f,1.0f,	    0.75f,0.64f,  //Esquina superior derecha
+		-0.5f,  0.5f,-0.5f,    1.0f, 1.0f,1.0f,		0.5f,0.64f,  //Esquina superior izquierda
+
+		//Cara derecha
+		 0.5f, -0.5f,  0.5f,   1.0f, 1.0f,1.0f,		0.25f,0.33f,  //Esquina inferior izquierda
+		 0.5f, -0.5f, -0.5f,   1.0f, 1.0f,1.0f,		0.5f,0.33f,  //Esquina inferior derecha
+		 0.5f,  0.5f, -0.5f,   1.0f, 1.0f,1.0f,	    0.5f,0.64f,  //Esquina superior derecha
+		 0.5f,  0.5f,  0.5f,   1.0f, 1.0f,1.0f,		0.25f,0.64f,  //Esquina superior izquierda
 		
+		 //Cara izquierda
+		-0.5f,  0.5f,  0.5f,   1.0f, 1.0f,1.0f,		0.75f,0.33f,  //Esquina inferior izquierda
+		-0.5f,  0.5f, -0.5f,   1.0f, 1.0f,1.0f,		1.0f,0.33f,  //Esquina inferior derecha
+		-0.5f, -0.5f, -0.5f,   1.0f, 1.0f,1.0f,	    1.0f,0.64f,  //Esquina superior derecha
+		-0.5f, -0.5f,  0.5f,   1.0f, 1.0f,1.0f,		0.75f,0.64f,  //Esquina superior izquierda
+
+		//Abajo
+		-0.5f, -0.5f, -0.5f,  1.0f, 1.0f,1.0f,		0.5f,0.0f,  //Esquina inferior izquierda
+		0.5f, -0.5f, -0.5f,  1.0f, 1.0f,1.0f,		0.75f,0.0f,  //Esquina inferior derecha
+		0.5f, -0.5f,  0.5f,  1.0f, 1.0f,1.0f,	    0.75f,0.33f,  //Esquina superior derecha
+		-0.5f, -0.5f,  0.5f,   1.0f, 1.0f,1.0f,		0.5f,0.33f,  //Esquina superior izquierda
+
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,1.0f,		0.5f,0.645f,  //Esquina inferior izquierda
+		 0.5f,  0.5f, -0.5f,   1.0f, 1.0f,1.0f,		0.75f,0.645f,  //Esquina inferior derecha
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,1.0f,	    0.75f,0.97f,  //Esquina superior derecha
+		-0.5f,  0.5f,  0.5f,  1.0f, 1.0f,1.0f,		0.5f,0.97f,  //Esquina superior izquierda
 	};
 
 	GLuint indices[] =
 	{  // Note that we start from 0!
 		0,1,3,
-		1,2,3
+		1,2,3,
+
+		4,5,7,
+		5,6,7,
+
+		8,9,11,
+		9,10,11,
+
+		12,13,15,
+		13,14,15,
+
+		16,17,19,
+		17,18,19,
+
+		20,21,23,
+		21,22,23
 	
 	};
 
@@ -158,9 +201,9 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	// Diffuse map
-	image = stbi_load("images/window.png", &textureWidth, &textureHeight, &nrChannels, 0);
+	image = stbi_load("images/dado.png", &textureWidth, &textureHeight, &nrChannels, 0);
 	glBindTexture(GL_TEXTURE_2D, texture1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, textureWidth, textureHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	if (image)
 	{
@@ -213,7 +256,7 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		// Draw the light object (using light's vertex attributes)
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 		// Swap the screen buffers
