@@ -1,8 +1,9 @@
 /*Autor: Lopez Hernandez Yesenia Sarahi
 * Num. Cuenta: 317248683
-* Previo 8: Materiales e Iluminacion
-* Objetivo: Realizar las activades vistas en el video
-* Fecha: 25 de Marzo de 2025
+* Practica 8: Materiales e Iluminacion
+* Objetivo: Añadir un "sol" y una "luna" con sus respectiva iluminacion
+* añadir un movimiento oscilatorio que tenga un limite de movimiento hasta el otro extremo 
+* Fecha: 30 de Marzo de 2025
 */
 
 // Std. Includes
@@ -28,7 +29,7 @@
 #include "SOIL2/SOIL2.h"
 #include "stb_image.h"
 // Properties
-const GLuint WIDTH = 800, HEIGHT = 600;
+const GLint WIDTH = 1200, HEIGHT = 800;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Function prototypes
@@ -43,10 +44,19 @@ bool keys[1024];
 GLfloat lastX = 400, lastY = 300;
 bool firstMouse = true;
 
+//Apagador de luces
+bool light1n = true;
+bool light2n = true;
 
 // Light attributes
-glm::vec3 lightPos(0.5f, 0.5f, 2.5f);
+glm::vec3 lightPos(5.0f, 0.0f, 0.0f);
+glm::vec3 lightPos2(6.0f, 0.0f, 0.0f);
 float movelightPos = 0.0f;
+
+//Movimiento
+float	lunaM = 0.0f,
+        solM = 0.0f;
+
 GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 float rot = 0.0f;
@@ -64,7 +74,7 @@ int main()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Yesenia Lopez, Previo 8: Materiales e Iluminacion", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Yesenia Lopez, Practica 8: Materiales e Iluminacion", nullptr, nullptr);
 
     if (nullptr == window)
     {
@@ -109,6 +119,19 @@ int main()
 
     // Load models
     Model red_dog((char*)"Models/RedDog.obj");
+    Model arbol((char*)"Modelos/Arbol.obj");
+    Model pino((char*)"Modelos/pino.obj");
+    Model pino2((char*)"Modelos/pino2.obj");
+    Model pino3((char*)"Modelos/pino3.obj");
+    Model suelo((char*)"Modelos/Suelo.obj");
+    Model roca((char*)"Modelos/roca.obj");
+    Model roca2((char*)"Modelos/Roca2.obj");
+    Model tronco((char*)"Modelos/Tronco.obj");
+    Model planta((char*)"Modelos/Planta.obj");
+    Model planta2((char*)"Modelos/Suegra.obj");
+    Model arbusto((char*)"Modelos/Arbusto.obj");
+    Model luna((char*)"Modelos/luna.obj");
+    Model sol((char*)"Modelos/sol.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     float vertices[] = {
@@ -210,22 +233,50 @@ int main()
         DoMovement();
 
         // Clear the colorbuffer
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
         lightingShader.Use();
+        float angle = glm::radians(lunaM); // el ángulo de movimiento de la luna
+        float angle2 = glm::radians(solM); // ángulo de movimiento del sol
+        lightPos.x = 4.2f * cos(angle);
+        lightPos.y= 4.2f * sin(angle);
+        lightPos2.x = 5.0f * cos(angle2);
+        lightPos2.y = 5.0f * sin(angle2);
         GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "light.position");
+        GLint lightPosLoc2 = glGetUniformLocation(lightingShader.Program, "light2.position");
         GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
-        glUniform3f(lightPosLoc, lightPos.x + movelightPos, lightPos.y + movelightPos, lightPos.z + movelightPos);
+        //glUniform3f(lightPosLoc, lightPos.x + movelightPos + lunaM, lightPos.y + movelightPos, lightPos.z + movelightPos);
+        glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+        glUniform3f(lightPosLoc2, lightPos2.x, lightPos2.y, lightPos2.z);
         glUniform3f(viewPosLoc, camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
-
-
+        
         // Set lights properties
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), 0.3f, 0.3f, 0.3f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.diffuse"), 0.2f, 0.7f, 0.8f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "light.specular"), 0.3f, 0.6f, 0.4f);
-
+        if (light1n) {
+            //Luna
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), 0.2f, 0.2f, 0.6f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light.diffuse"), 0.1f, 0.1f, 0.8f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light.specular"), 0.3f, 0.8f, 1.0f);
+        }
+        else {
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light.diffuse"), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light.specular"), 0.0f, 0.0f, 0.0f);
+        }
+        
+        //Segunda luz
+        //Sol
+        if (light2n) {
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.ambient"), 0.4f, 0.2f, 0.1f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.diffuse"), 0.9f, 0.3f, 0.2f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.specular"), 0.6f, 1.0f, 1.0f);
+        }
+        else {
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.ambient"), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.diffuse"), 0.0f, 0.0f, 0.0f);
+            glUniform3f(glGetUniformLocation(lightingShader.Program, "light2.specular"), 0.0f, 0.0f, 0.0f);
+        }
+        
 
         glm::mat4 view = camera.GetViewMatrix();
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
@@ -233,36 +284,157 @@ int main()
 
         // Set material properties
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.ambient"), 0.5f, 0.5f, 0.5f);
-        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.8f, 0.8f, 0.0f);
+        glUniform3f(glGetUniformLocation(lightingShader.Program, "material.diffuse"), 0.5f, 0.5f, 0.5f);
         glUniform3f(glGetUniformLocation(lightingShader.Program, "material.specular"), 1.0f, 1.0f, 1.0f);
-        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.8f);
+        glUniform1f(glGetUniformLocation(lightingShader.Program, "material.shininess"), 0.5f);
 
 
         // Draw the loaded model
         glm::mat4 model(1);
-        model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
+        model = glm::translate(model, glm::vec3(0.0f, -0.1f, 0.0f)); // Posición del perro
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        glBindVertexArray(VAO);
         red_dog.Draw(lightingShader);
-        //glDrawArrays(GL_TRIANGLES, 0, 36);
 
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.5f, -0.15f, 1.2f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f)); // Escala del árbol
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(lightingShader);
+
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.0f, -0.1f, -0.2f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.95f, 0.95f, 0.95f)); // Escala del árbol
+        model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 1.0f, 0.0f)); //Rotacion del árbol
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(lightingShader);
+
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.1f, -0.1f, 0.7f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.83f, 0.83f, 0.83f)); // Escala del árbol
+        model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 0.2f, 0.0f)); //Rotacion del árbol
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(lightingShader);
+
+        // Draw the arbol model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.3f, -1.0f)); // Posición del árbol
+        model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f)); // Escala del árbol
+        model = glm::rotate(model, 3.14f, glm::vec3(0.0f, 0.8f, 0.0f)); //Rotacion del árbol
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbol.Draw(lightingShader);
+
+        // Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.4f, -0.3f, -0.8f));
+        model = glm::scale(model, glm::vec3(0.85f, 0.85f, 0.85f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino2.Draw(lightingShader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-2.2f, -0.3f, -1.4f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino.Draw(lightingShader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.4f, -0.3f, 1.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino2.Draw(lightingShader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.4f, -0.3f, 0.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino3.Draw(lightingShader);
+
+        //Draw the pino model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(2.4f, -0.3f, 0.6f));
+        model = glm::scale(model, glm::vec3(0.85f, 0.85f, 0.85f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pino.Draw(lightingShader);
+
+        // Draw the suelo model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.0f));
+        model = glm::scale(model, glm::vec3(2.0f, 1.0f, 2.0f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        suelo.Draw(lightingShader);
+
+        // Draw the roca model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-0.1f, -0.4f, 0.2f));
+        model = glm::scale(model, glm::vec3(1.2f, 1.2f, 1.2f)); // Escala de la roca
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        roca.Draw(lightingShader);
+
+        // Draw the roca2 model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.5f, 0.2f));
+        model = glm::scale(model, glm::vec3(0.65f, 0.65f, 0.65f)); // Escala de la segunda roca
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        roca2.Draw(lightingShader);
+
+        // Draw the planta model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(1.0f, -0.3f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.95f, 1.2f, 0.95f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        planta.Draw(lightingShader);
+
+        // Draw the planta model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 3.0f));
+        model = glm::scale(model, glm::vec3(0.95f, 0.95f, 0.95f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        planta2.Draw(lightingShader);
+
+        // Draw the tronco model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.2f, 0.0f));
+        model = glm::scale(model, glm::vec3(0.90f, 0.90f, 0.90f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        tronco.Draw(lightingShader);
+
+        // Draw the arbusto model
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(0.0f, -0.15f, -2.5f));
+        model = glm::scale(model, glm::vec3(2.5f, 2.5f, 2.5f));
+        glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        arbusto.Draw(lightingShader);
 
 
         glBindVertexArray(0);
 
-
-
-
+        //Creacion de nuestra iluminacion
         lampshader.Use();
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+        //Luna
         model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos + movelightPos);
-        model = glm::scale(model, glm::vec3(0.3f));
+       // model = glm::translate(model, lightPos + movelightPos);
+        model = glm::translate(model, lightPos);
+        model = glm::scale(model, glm::vec3(0.7f));
         glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        //glDrawArrays(GL_TRIANGLES, 0, 36);
+        luna.Draw(lightingShader);
         glBindVertexArray(0);
+
+        //Sol
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, lightPos2);
+        model = glm::scale(model, glm::vec3(0.8f));
+        glUniformMatrix4fv(glGetUniformLocation(lampshader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glBindVertexArray(VAO);
+        sol.Draw(lightingShader);
+        glBindVertexArray(0);
+
+
 
         // Swap the buffers
         glfwSwapBuffers(window);
@@ -340,7 +512,29 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
         movelightPos -= 0.1f;
     }
 
+    //Controlar luces
+    if (action == GLFW_PRESS) {
+        //Cotrol de la luna
+        if (key == GLFW_KEY_K) // Alternar la luz 1
+            light1n = !light1n;
+        //Control de el sol
+        if (key == GLFW_KEY_I) // Alternar la luz 2
+            light2n = !light2n;
+    }
 
+    //Movimiento oscilatorio 
+    if (keys[GLFW_KEY_R])
+        if (lunaM < 190.0f)
+            lunaM += 0.6f;
+    if (keys[GLFW_KEY_F])
+        if (lunaM > -10.0f)
+            lunaM -= 0.6f;
+    if (keys[GLFW_KEY_T])
+        if (solM < 190.0f)
+            solM += 0.6f;
+    if (keys[GLFW_KEY_G])
+        if (solM > -10.0f)
+            solM -= 0.6f;
 }
 
 void MouseCallback(GLFWwindow* window, double xPos, double yPos)
